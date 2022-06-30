@@ -21,7 +21,7 @@
     
     {{-- メッセージ削除フォーム --}}
     {!! Form::model($task, ['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
-        {!! Form::submit('確認なしにタスクを1発削除する', ['class' => 'btn btn-danger']) !!}
+        {!! Form::submit('確認なしに、このひとつのタスクを1発削除する', ['class' => 'btn btn-danger']) !!}
     {!! Form::close() !!}
 
 
