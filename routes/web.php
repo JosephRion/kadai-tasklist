@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-下で1業で書き換えている。
+下で2行で書き換えている。
 */
 /*
 // CRUD

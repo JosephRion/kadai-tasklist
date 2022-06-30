@@ -37,7 +37,7 @@
 
         <div class="container">
             {{-- エラーメッセージ --}}
-            @include('commons.error_messages')  <!--エラーメッセージの共通部をまとめる-->
+            @include('commons.error_tasks')  <!--エラーメッセージの共通部をまとめるmessage→tasks-->
             
             @yield('content')
         </div>

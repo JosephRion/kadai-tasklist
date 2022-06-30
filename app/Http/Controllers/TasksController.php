@@ -57,11 +57,13 @@ class TasksController extends Controller
         //
         // バリデーション
         $request->validate([
-            'content' => 'required|max:10',  //255から10へ変更
+            'status' => 'required|max:10',   // 追加255→10へ
+            'content' => 'required|max:255',  //255から10へ変更したこともある
         ]);
         
         // メッセージを作成
         $task = new Task;
+        $task->status = $request->status;    // 追加
         $task->content = $request->content;
         $task->save();
 
@@ -121,12 +123,14 @@ class TasksController extends Controller
         //
         // バリデーション
         $request->validate([
-            'content' => 'required|max:10', //255→10へ
+            'status' => 'required|max:10',   // 追加.255→10へ
+            'content' => 'required|max:255', //
         ]);
         
         // idの値でメッセージを検索して取得
         $task = Task::findOrFail($id);
         // メッセージを更新
+        $task->status = $request->status;    // 追加 titleからstatusへ
         $task->content = $request->content;
         $task->save();
 
