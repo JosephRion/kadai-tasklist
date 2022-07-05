@@ -40,9 +40,9 @@ Route::get('tasks/{id}/edit', 'TasksController@edit')->name('tasks.edit');
 
 
 // デフォルトのコメント部分は省略
-
+// L14まではこれ
 Route::get('/', 'TasksController@index');
-
+// L14まではこれだった。
 Route::resource('tasks', 'TasksController');
-//実はたった1行の記述で7つの基本ルーティングが用意できる省略形もあります。
-//結局この2行だけとのこと。。
+// 実はたった1行の記述で7つの基本ルーティングが用意できる省略形もあります。
+// 結局この2行だけとのこと。。
