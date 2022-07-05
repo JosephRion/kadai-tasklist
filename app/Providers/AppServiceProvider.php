@@ -23,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \URL::forceScheme('https');
+        \URL::forceScheme('https'); //2022.07.05でL15 C3.1でもOK
     }
 }
