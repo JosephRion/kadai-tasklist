@@ -29,9 +29,9 @@
                 
                 {{-- L15 C7.3 2022.07.06..1350TKT--}}
                 @if (Auth::check())
-                    {{-- ユーザ一覧ページへのリンク --}}
+                    {{-- ユーザ一覧ページへのリンク 
                     <li class="nav-item"><a href="#" class="nav-link">Users</a></li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown">  不要 ユーザー一覧不要のため 2022.07.06 1407TKT--}}
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             {{-- ユーザ詳細ページへのリンク --}}
