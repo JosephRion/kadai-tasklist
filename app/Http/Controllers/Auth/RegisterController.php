@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class RegisterController extends Controller
 {
     /*
+    L15C6.2
     |--------------------------------------------------------------------------
     | Register Controller
     |--------------------------------------------------------------------------
@@ -26,7 +27,8 @@ class RegisterController extends Controller
 
     /**
      * Where to redirect users after registration.
-     *
+     *ユーザ登録が完了すると、ログイン状態になった上で、指定のリダイレクト先へ飛ぶようになっています。
+     * そのリダイレクト先は $redirectTo 変数に設定されている定数 RouteServiceProvider::HOME で定義されています。
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;

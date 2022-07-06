@@ -23,7 +23,7 @@ class LoginController extends Controller
 
     /**
      * Where to redirect users after login.
-     *
+     * L15 C7.2 リダイレクト ログイン成功後のリダイレクト先もユーザ登録成功後と同じ RouteServiceProvider::HOME に設定されています。
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;

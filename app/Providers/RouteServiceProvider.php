@@ -18,10 +18,12 @@ class RouteServiceProvider extends ServiceProvider
 
     /**
      * The path to the "home" route for your application.
-     *
+     *これでリダイレクト先がトップページになります。L15 C6.3
      * @var string
      */
-    public const HOME = '/home';
+    //public const HOME = '/home';
+    //これでリダイレクト先がトップページになります。L15 C6.3
+    public const HOME = '/';
 
     /**
      * Define your route model bindings, pattern filters, etc.
