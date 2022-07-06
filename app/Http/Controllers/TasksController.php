@@ -14,6 +14,7 @@ class TasksController extends Controller
      * @return \Illuminate\Http\Response
      */
     // getでtasks/にアクセスされた場合の「一覧表示処理」
+    // L15 C9.3 MicropostsController@index から
     public function index()
     {
         //
@@ -70,7 +71,7 @@ class TasksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // postでtasks/にアクセスされた場合の「新規登録処理」
+    // L15 C9.4 postでtasks/にアクセスされた場合の「新規登録処理」 
     public function store(Request $request)
     {
         //
@@ -78,6 +79,12 @@ class TasksController extends Controller
         $request->validate([
             'status' => 'required|max:10',   // 追加255→10へ
             'content' => 'required|max:255',  //255から10へ変更したこともある
+        ]);
+        
+         // 認証済みユーザ（閲覧者）の投稿として作成（リクエストされた値をもとに作成）
+         //L15 C9.4にて追加
+        $request->user()->microposts()->create([
+            'content' => $request->content,
         ]);
         
         // メッセージを作成
@@ -172,6 +179,9 @@ class TasksController extends Controller
         //$task = Task::findOrFail($id);
         // メッセージを削除
         //$task->delete();
+        
+        //Lesson 15Chapter 9.5 destroy
+        $task = \App\Task::findOrFail($id);
         
         //Lesson 15Chapter 9.5 destroy
         // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は、投稿を削除
