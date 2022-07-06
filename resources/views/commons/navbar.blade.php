@@ -27,6 +27,7 @@
                 {{-- ログインページへのリンク 
                 <li class="nav-item"><a href="#" class="nav-link">Login</a></li> --}}
                 
+                {{-- L15 C7.3 2022.07.06..1350TKT--}}
                 @if (Auth::check())
                     {{-- ユーザ一覧ページへのリンク --}}
                     <li class="nav-item"><a href="#" class="nav-link">Users</a></li>

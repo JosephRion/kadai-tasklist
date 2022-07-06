@@ -18,9 +18,12 @@ Route::get('/', function () {
 */
 
 //L15C5.2でこっちに戻した
-Route::get('/', function () {
-    return view('welcome');
-});
+//この記述は/ のURL(トップページ)へのGETリクエストが送信された場合、 Controllerを経由せずに直接welcome.blade.phpを読み込む という意味になります。
+//トップページはWebの世界では / のURLのページ ですね。 / のページの時に、まずは ログインしているかどうか判断 し、それぞれに応じた処理を行う必要がありそうです。
+//このような「複雑な処理」を行う場合は Controllerで行う のが一般的ですので、今回のケースではまずControllerを使用した方がよさそうですね。
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 
 
