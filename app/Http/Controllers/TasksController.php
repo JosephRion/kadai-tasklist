@@ -14,12 +14,12 @@ class TasksController extends Controller
      * @return \Illuminate\Http\Response
      */
     // getでtasks/にアクセスされた場合の「一覧表示処理」
-    // L15 C9.3 MicropostsController@index から
+    // L15 C9.3 MicropostsControllerあっとindex から
     public function index()
     {
-        //
-        // メッセージ一覧を取得
-        //$tasks = Task::all();
+        
+        // //メッセージ一覧を取得
+        // $tasks = Task::all();
         // $tasks = Task::orderBy('id', 'desc')->paginate(10); //desc降順 ページネーション10
 
         // // メッセージ一覧ビューでそれを表示
@@ -42,9 +42,10 @@ class TasksController extends Controller
             ];
         }
 
-        // Welcomeビューでそれらを表示
+        // Welcomeビューでそれらを表示 L15 C9.3での表現
+        //return view('welcome', $data);
         return view('welcome', $data);
-        
+        //Lesson13時点のタスク一覧(トップページ)では 「???」のViewファイルを読み込んでいたはずなので、同じような内容を表示するのであれば、welcome.blade.phpの「ログインしている場合」の指定内に「???」のviewファイルを指定すればよさそうです。
     }
 
     /**
@@ -81,17 +82,14 @@ class TasksController extends Controller
             'content' => 'required|max:255',  //255から10へ変更したこともある
         ]);
         
-         // 認証済みユーザ（閲覧者）の投稿として作成（リクエストされた値をもとに作成）
-         //L15 C9.4にて追加
-        $request->user()->microposts()->create([
-            'content' => $request->content,
-        ]);
-        
         // メッセージを作成
-        $task = new Task;
-        $task->status = $request->status;    // 追加
+        $task = new Task; // 追加
+        $task->user_id = \Auth::id();   //Lesson 15Chapter 8.4
+        //実行中のクラスの名前空間は App\Http\Controllers\ ですので、そこでAuthとだけ指定すると、 App\Http\Controllers\Auth を探しに行きます。
+        //しかし、実際のAuthの名前空間は \ ですので、 \Auth::id() と指定が必要です。
+        $task->status = $request->status;    
         $task->content = $request->content;
-        $task->save();
+        $task->save();  //saveは登録対象のidがなければ 登録 、あれば更新を行うものです。
 
         // トップページへリダイレクトさせる
         return redirect('/');

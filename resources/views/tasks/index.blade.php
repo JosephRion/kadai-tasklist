@@ -1,4 +1,4 @@
-@extends('layouts.app')
+<!--あっとextends('layouts.app')このviewファイルにあると混乱しやすいので、つけるべきではない。-->
 
 @section('content')
 
@@ -32,9 +32,9 @@
     {{ $tasks->links() }}
     
     
-    {{-- メッセージ作成ページへのリンク --}}
-    {!! link_to_route('tasks.create', '新規タスクを登録する', [], ['class' => 'btn btn-primary']) !!}
+    {{-- メッセージ作成ページへのリンクLesson 13Chapter 12.2 MessagesControllerindexの修正 --}}
     
+    {!! link_to_route('tasks.create', '新規タスクを登録してみる', [], ['class' => 'btn btn-primary']) !!}
     
 
 @endsection
