@@ -18,15 +18,6 @@ class TasksController extends Controller
     public function index()
     {
         
-        // //メッセージ一覧を取得
-        // $tasks = Task::all();
-        // $tasks = Task::orderBy('id', 'desc')->paginate(10); //desc降順 ページネーション10
-
-        // // メッセージ一覧ビューでそれを表示
-        // return view('tasks.index', [
-        //     'tasks' => $tasks,
-        // ]);
-        
         //2022.07.06..1331
         $data = [];
         if (\Auth::check()) { // 認証済みの場合
@@ -75,15 +66,14 @@ class TasksController extends Controller
     // L15 C9.4 postでtasks/にアクセスされた場合の「新規登録処理」 
     public function store(Request $request)
     {
-        //
         // バリデーション
         $request->validate([
-            'status' => 'required|max:10',   // 追加255→10へ
-            'content' => 'required|max:255',  //255から10へ変更したこともある
+            'status' => 'required|max:10',   // 追加255→10文字制限へ
+            'content' => 'required|max:255',  //255文字制限。
         ]);
         
         // メッセージを作成
-        $task = new Task; // 追加
+        $task = new Task; // 新規レコードを追加する
         $task->user_id = \Auth::id();   //Lesson 15Chapter 8.4
         //実行中のクラスの名前空間は App\Http\Controllers\ ですので、そこでAuthとだけ指定すると、 App\Http\Controllers\Auth を探しに行きます。
         //しかし、実際のAuthの名前空間は \ ですので、 \Auth::id() と指定が必要です。
@@ -104,14 +94,21 @@ class TasksController extends Controller
     // getでtasks/（任意のid）にアクセスされた場合の「取得表示処理」
     public function show($id)
     {
-        //
         // idの値でメッセージを検索して取得
-        $task = Task::findOrFail($id);
-
+        $task = Task::findOrFail($id); //この定義はif文の前に定義文として置いておかないといけない。
+        
+        if (\Auth::id() === $task->user_id) {
+        
         // メッセージ詳細ビューでそれを表示
         return view('tasks.show', [
             'task' => $task,
         ]);
+        } //if文の終わり
+        
+        else {
+            return redirect('/');
+        }
+        
         
     }
 
@@ -127,11 +124,19 @@ class TasksController extends Controller
         //
         // idの値でメッセージを検索して取得
         $task = Task::findOrFail($id);
+        
+         if (\Auth::id() === $task->user_id) {
 
         // メッセージ編集ビューでそれを表示
         return view('tasks.edit', [
             'task' => $task,
         ]);
+         } //if文の終わり
+        
+        else {
+            return redirect('/');
+        }
+        
     }
 
     /**
@@ -154,9 +159,12 @@ class TasksController extends Controller
         // idの値でメッセージを検索して取得
         $task = Task::findOrFail($id);
         // メッセージを更新
+        //ログインしている人の投稿のみ更新できるようにする
+        if (\Auth::id() === $task->user_id) {
         $task->status = $request->status;    // 追加 titleからstatusへ
         $task->content = $request->content;
         $task->save();
+        }
 
         // トップページへリダイレクトさせる
         return redirect('/');
