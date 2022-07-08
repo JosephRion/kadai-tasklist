@@ -13,12 +13,12 @@
 
                 {{-- L15 C7.3 2022.07.06..1350TKT--}}
                 @if (Auth::check())
-                    <li>
+                    <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            {{-- ユーザ詳細ページへのリンク --}}
+                            {{-- ユーザ詳細ページへのリンク 
                             <li class="dropdown-item"><a href="#">My profile</a></li>
-                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-divider"></li>横棒線--}}
                             {{-- ログアウトへのリンク --}}
                             <li class="dropdown-item">{!! link_to_route('logout.get', 'Logout') !!}</li>
                         </ul>
